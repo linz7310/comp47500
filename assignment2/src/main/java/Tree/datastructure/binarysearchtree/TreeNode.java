@@ -1,7 +1,7 @@
 package Tree.datastructure.binarysearchtree;
 
 /**
- * 力扣用到的二叉搜索树节点
+ * TreeNode
  */
 public class TreeNode {
     public int val;

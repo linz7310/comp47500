@@ -15,14 +15,13 @@ public class BTSTree {
     public boolean isValidBST(TreeNode node) {
         TreeNode p = node;
         LinkedList<TreeNode> stack = new LinkedList<>();
-        long prev = Long.MIN_VALUE; // 代表上一个值
+        long prev = Long.MIN_VALUE;
         while (p != null || !stack.isEmpty()) {
             if (p != null) {
                 stack.push(p);
                 p = p.left;
             } else {
                 TreeNode pop = stack.pop();
-                // 处理值
 //                System.out.println("compare:" + prev + " " + pop.val);
                 if (prev >= pop.val) {
                     return false;

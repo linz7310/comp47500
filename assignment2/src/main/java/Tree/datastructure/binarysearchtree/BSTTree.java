@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Binary Search Tree 二叉搜索树
+ * Binary Search Tree
  */
 @SuppressWarnings("all")
 public class BSTTree {
 
-    BSTNode root; // 根节点
+    BSTNode root;
 
     static class BSTNode {
         int key;
@@ -56,9 +56,9 @@ public class BSTTree {
     }
 
     /**
-     * <h3>查找最小关键字对应值</h3>
+     * <h3>find the min value of all keys</h3>
      *
-     * @return 关键字对应的值
+     * @return value of key
      */
     public Object min() {
         return min(root);
@@ -76,9 +76,9 @@ public class BSTTree {
     }
 
     /**
-     * <h3>查找最大关键字对应值</h3>
+     * <h3>find the max value of all keys</h3>
      *
-     * @return 关键字对应的值
+     * @return value of key
      */
     public Object max() {
         return max(root);
@@ -96,10 +96,10 @@ public class BSTTree {
     }
 
     /**
-     * <h3>存储关键字和对应值</h3>
+     * <h3>save the key and value</h3>
      *
-     * @param key   关键字
-     * @param value 值
+     * @param key
+     * @param value
      */
     public void put(int key, Object value) {
         root = doPut(root, key, value);
@@ -120,10 +120,10 @@ public class BSTTree {
     }
 
     /**
-     * <h3>查找关键字的前任值</h3>
+     * <h3>find the predecessor of key </h3>
      *
-     * @param key 关键字
-     * @return 前任值
+     * @param key key number
+     * @return predecessor
      */
     public Object predecessor(int key) {
         BSTNode p = root;
@@ -138,24 +138,26 @@ public class BSTTree {
                 break;
             }
         }
-        // 没找到节点
+        // No nodes found.
         if (p == null) {
             return null;
         }
-        // 找到节点 情况1：节点有左子树，此时前任就是左子树的最大值
+        // Find the node Case 1: the node has a left subtree,
+        // and the predecessor is the maximum value of the left subtree.
         if (p.left != null) {
             return max(p.left);
         }
-        // 找到节点 情况2：节点没有左子树，若离它最近的、自左而来的祖先就是前任
+        // Finding a node Case 2: a node has no left subtree,
+        // if the nearest ancestor from the left is the predecessor.
         return ancestorFromLeft != null ?
                 ancestorFromLeft.value : null;
     }
 
     /**
-     * <h3>查找关键字的后任值</h3>
+     * <h3>find the seccessor of key</h3>
      *
-     * @param key 关键字
-     * @return 后任值
+     * @param key key number
+     * @return successor
      */
     public Object successor(int key) {
         BSTNode p = root;
@@ -170,69 +172,28 @@ public class BSTTree {
                 break;
             }
         }
-        // 没找到节点
+        // No nodes found.
         if (p == null) {
             return null;
         }
-        // 找到节点 情况1：节点有右子树，此时后任就是右子树的最小值
+        // Find the node Case 1: the node has a right subtree,
+        // in which case the latter is the minimum of the right subtree.
         if (p.right != null) {
             return min(p.right);
         }
-        // 找到节点 情况2：节点没有右子树，若离它最近的、自右而来的祖先就是后任
+        // Find node Case 2: node has no right subtree,
+        // if the nearest ancestor from the right is the successor
         return ancestorFromRight != null ?
                 ancestorFromRight.value : null;
     }
 
     /**
-     * <h3>根据关键字删除</h3>
+     * <h3>Delete by keyword</h3>
      *
-     * @param key 关键字
-     * @return 被删除关键字对应值
+     * @param key key number
+     * @return The value of the deleted keyword
      */
 
-//    public Object remove(int key) {
-//        ArrayList<Object> result = new ArrayList<>(); // 保存被删除节点的值
-//        root = doRemove(root, key, result);
-//        return result.isEmpty() ? null : result.get(0);
-//    }
-//
-//    /*
-//              4
-//             / \
-//            2   6
-//           /     \
-//          1       7
-//
-//        node 起点
-//        返回值 删剩下的孩子(找到) 或 null(没找到)
-//     */
-//    private BSTNode doRemove(BSTNode node, int key, ArrayList<Object> result) {
-//        if (node == null) {
-//            return null;
-//        }
-//        if (key < node.key) {
-//            node.left = doRemove(node.left, key, result);
-//            return node;
-//        }
-//        if (node.key < key) {
-//            node.right = doRemove(node.right, key, result);
-//            return node;
-//        }
-//        result.add(node.value);
-//        if (node.left == null) { // 情况1 - 只有右孩子
-//            return node.right;
-//        }
-//        if (node.right == null) { // 情况2 - 只有左孩子
-//            return node.left;
-//        }
-//        BSTNode s = node.right; // 情况3 - 有两个孩子
-//        while (s.left != null) {
-//            s = s.left;
-//        }
-//        s.right = doRemove(node.right, s.key, new ArrayList<>());
-//        s.left = node.left;
-//        return s;
-//    }
 
     public Object remove(int key) {
         BSTNode p = root;
@@ -251,27 +212,22 @@ public class BSTTree {
         if (p == null) {
             return null;
         }
-        // 删除操作
         if (p.left == null) {
-            shift(parent, p, p.right); // 情况1
+            shift(parent, p, p.right);
         } else if (p.right == null) {
-            shift(parent, p, p.left); // 情况2
+            shift(parent, p, p.left);
         } else {
-            // 情况4
-            // 4.1 被删除节点找后继
+
             BSTNode s = p.right;
-            BSTNode sParent = p; // 后继父亲
+            BSTNode sParent = p;
             while (s.left != null) {
                 sParent = s;
                 s = s.left;
             }
-            // 后继节点即为 s
-            if (sParent != p) { // 不相邻
-                // 4.2 删除和后继不相邻, 处理后继的后事
-                shift(sParent, s, s.right); // 不可能有左孩子
+            if (sParent != p) {
+                shift(sParent, s, s.right);
                 s.right = p.right;
             }
-            // 4.3 后继取代被删除节点
             shift(parent, p, s);
             s.left = p.left;
         }
@@ -279,11 +235,11 @@ public class BSTTree {
     }
 
     /**
-     * 托孤方法
      *
-     * @param parent  被删除节点的父亲
-     * @param deleted 被删除节点
-     * @param child   被顶上去的节点
+     *
+     * @param parent  the parent of deleted key
+     * @param deleted deleted key
+     * @param child
      */
     private void shift(BSTNode parent, BSTNode deleted, BSTNode child) {
         if (parent == null) {
@@ -303,7 +259,7 @@ public class BSTTree {
             1   3 5   7
      */
 
-    // 找 < key 的所有 value
+    // find all values < key
     public List<Object> less(int key) { // key=6
         ArrayList<Object> result = new ArrayList<>();
         BSTNode p = root;
@@ -326,26 +282,8 @@ public class BSTTree {
         return result;
     }
 
-    // 找 > key 的所有 value
+    // find all values > key
     public List<Object> greater(int key) {
-        /*ArrayList<Object> result = new ArrayList<>();
-        BSTNode p = root;
-        LinkedList<BSTNode> stack = new LinkedList<>();
-        while (p != null || !stack.isEmpty()) {
-            if (p != null) {
-                stack.push(p);
-                p = p.left;
-            } else {
-                BSTNode pop = stack.pop();
-                // 处理值
-                if (pop.key > key) {
-                    result.add(pop.value);
-                }
-                p = pop.right;
-            }
-        }
-        return result;*/
-
         ArrayList<Object> result = new ArrayList<>();
         BSTNode p = root;
         LinkedList<BSTNode> stack = new LinkedList<>();
@@ -355,7 +293,6 @@ public class BSTTree {
                 p = p.right;
             } else {
                 BSTNode pop = stack.pop();
-                // 处理值
                 if (pop.key > key) {
                     result.add(pop.value);
                 } else {
@@ -367,7 +304,7 @@ public class BSTTree {
         return result;
     }
 
-    // 找 >= key1 且 <= key2 的所有值
+    // ind all values >= key1 and <= key2.
     public List<Object> between(int key1, int key2) {
         ArrayList<Object> result = new ArrayList<>();
         BSTNode p = root;
@@ -378,7 +315,6 @@ public class BSTTree {
                 p = p.left;
             } else {
                 BSTNode pop = stack.pop();
-                // 处理值
                 if (pop.key >= key1 && pop.key <= key2) {
                     result.add(pop.value);
                 } else if (pop.key > key2) {
