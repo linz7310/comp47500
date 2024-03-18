@@ -7,7 +7,7 @@ import java.util.LinkedList;
  * ClassName BTSTree
  * Package Tree.algorithm.binarysearchtree
  * Description:
- *
+ *Validate Binary Search Tree
  * @Author: Lin
  * @Creat: 2024/3/18
  */

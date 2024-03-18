@@ -36,10 +36,8 @@ public class BSTTree {
     }
 
     /**
-     * <h3>查找关键字对应的值</h3>
+     * <h3>get the value by key</h3>
      *
-     * @param key 关键字
-     * @return 关键字对应的值
      */
     public Object get(int key) {
         BSTNode node = root;
