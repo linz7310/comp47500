@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 /**
  * ClassName BTSTree
- * Package java.algorithm.binarysearchtree
+ * Package Tree.algorithm.binarysearchtree
  * Description:
  *
  * @Author: Lin
