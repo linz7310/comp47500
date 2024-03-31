@@ -49,7 +49,6 @@ public class PriorityMadeByUnSortedSeq<E extends Priority> {
 
     private void remove(int index) {
         if (index < size - 1) {
-            // 移动
             System.arraycopy(array, index + 1,
                     array, index, size - 1 - index);
         }
@@ -66,7 +65,7 @@ public class PriorityMadeByUnSortedSeq<E extends Priority> {
     }
 
 
-    public boolean isEmpty() {
+    public boolean isEmpty()  {
         return size == 0;
     }
 
@@ -76,35 +75,41 @@ public class PriorityMadeByUnSortedSeq<E extends Priority> {
     }
 
     public static void main(String[] args) {
-        // 创建 PriorityMadeByHeap 对象
+        long startTime, endTime;
         PriorityMadeByHeap<Entry> priorityQueue = new PriorityMadeByHeap<>(5, true);
 
-        // 添加元素
+        // add elements
+        startTime = System.nanoTime();
         priorityQueue.offer(new Entry("A", 10));
         priorityQueue.offer(new Entry("B", 20));
         priorityQueue.offer(new Entry("C", 5));
         priorityQueue.offer(new Entry("D", 15));
         priorityQueue.offer(new Entry("E", 25));
+        endTime = System.nanoTime();
+        System.out.println("Time to offer: " + (endTime - startTime) + " ns");
 
-        // 输出当前队列状态
+        // show the queue
         System.out.println("Queue after adding elements:");
         System.out.println(priorityQueue.toString());
 
-        // 删除元素
+        // delete element
+        startTime = System.nanoTime();
         int deleted = priorityQueue.poll();
         System.out.println("Deleted element: " + deleted);
+        endTime = System.nanoTime();
+        System.out.println("Deleted element: "  + " in " + (endTime - startTime) + " ns");
 
         deleted = priorityQueue.poll();
         System.out.println("Deleted element: " + deleted);
 
-        // 输出删除元素后的队列状态
+        // check the queue after deleting
         System.out.println("Queue after removing elements:");
         System.out.println(priorityQueue.toString());
 
-        // 查看堆顶元素
+
         System.out.println("Peek: " + priorityQueue.peek());
 
-        // 检查队列是否为空和已满
+
         System.out.println("Is empty: " + priorityQueue.isEmpty());
         System.out.println("Is full: " + priorityQueue.isFull());
     }
