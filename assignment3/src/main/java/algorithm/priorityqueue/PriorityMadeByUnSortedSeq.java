@@ -76,7 +76,7 @@ public class PriorityMadeByUnSortedSeq<E extends Priority> {
 
     public static void main(String[] args) {
         long startTime, endTime;
-        PriorityMadeByHeap<Entry> priorityQueue = new PriorityMadeByHeap<>(5, true);
+        PriorityMadeByUnSortedSeq<Entry> priorityQueue = new PriorityMadeByUnSortedSeq<>(10);
 
         // add elements
         startTime = System.nanoTime();
@@ -94,7 +94,7 @@ public class PriorityMadeByUnSortedSeq<E extends Priority> {
 
         // delete element
         startTime = System.nanoTime();
-        int deleted = priorityQueue.poll();
+        Entry deleted = priorityQueue.poll();
         System.out.println("Deleted element: " + deleted);
         endTime = System.nanoTime();
         System.out.println("Deleted element: "  + " in " + (endTime - startTime) + " ns");
