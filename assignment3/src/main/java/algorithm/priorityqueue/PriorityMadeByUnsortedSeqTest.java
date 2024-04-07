@@ -6,7 +6,7 @@ public class PriorityMadeByUnsortedSeqTest {
     public static void main(String[] args) {
         long startTime, endTime;
 
-        // testing procedure
+        // testing procedure data elements from 50 to 50000
         int[] numbersOfEleArr = new int[]{50, 500, 5000, 50000};
 
         for(int ele: numbersOfEleArr){
