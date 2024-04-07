@@ -162,4 +162,21 @@ public class AVLTree {
         // 5. balance
         return balance(node);
     }
+
+    public Object search(int key) {
+        return doSearch(root, key);
+    }
+
+    private Object doSearch(AVLNode node, int key) {
+        if (node == null) {
+            return null;
+        }
+        if (key == node.key) {
+            return node.value;
+        } else if (key < node.key) {
+            return doSearch(node.left, key);
+        } else {
+            return doSearch(node.right, key);
+        }
+    }
 }
