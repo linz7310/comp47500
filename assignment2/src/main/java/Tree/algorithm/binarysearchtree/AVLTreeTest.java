@@ -7,7 +7,7 @@ import java.util.Random;
 public class AVLTreeTest {
 
     public static void main(String[] args) {
-        int[] nodeCounts = {50, 100, 500, 1000, 5000, 10000};
+        int[] nodeCounts = {10000, 5000, 1000, 500, 200,100, 50};
 
         for (int count : nodeCounts) {
             AVLTree avlTree = new AVLTree();
