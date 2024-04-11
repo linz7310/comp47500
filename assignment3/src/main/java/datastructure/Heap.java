@@ -79,7 +79,6 @@ public class Heap {
      */
     public void offer(int offered) {
         if (size == array.length) {
-            // 扩容
             grow();
         }
         up(offered, size);
@@ -94,9 +93,8 @@ public class Heap {
         array = newArray;
     }
 
-    // 建堆
+    // build heap
     private void heapify() {
-        // 如何找到最后这个非叶子节点  size / 2 - 1
         for (int i = size / 2 - 1; i >= 0; i--) {
             down(i);
         }

@@ -63,7 +63,21 @@ public class PriorityMadeBySortedSeq<E extends Priority> {
     public boolean isFull() {
         return size == array.length;
     }
-
+    @Override
+    public String toString() {
+        if (size == 0) {
+            return "[]";
+        }
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < size; i++) {
+            sb.append(array[i]);
+            if (i < size - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
     public static void main(String[] args) {
 
@@ -82,7 +96,7 @@ public class PriorityMadeBySortedSeq<E extends Priority> {
 
         // show the queue
         System.out.println("Queue after adding elements:");
-        System.out.println(priorityQueue.toString());
+        System.out.println(priorityQueue);
 
         // delete element
         startTime = System.nanoTime();
