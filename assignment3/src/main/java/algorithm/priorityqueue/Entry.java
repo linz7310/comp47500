@@ -1,6 +1,6 @@
 package algorithm.priorityqueue;
 
-class Entry implements Priority {
+public class Entry implements Priority {
 
     String value;
     int priority;

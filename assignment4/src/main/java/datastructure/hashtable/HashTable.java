@@ -95,6 +95,8 @@ public class HashTable {
                 size--;
                 return p.value;
             }
+            prev = p; // update prev pointer
+            p = p.next; // move to the next node
         }
         return null;
     }
