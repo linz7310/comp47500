@@ -10,7 +10,7 @@ package datastructure.hashtable;
  */
 public class HashTable {
     static class Entry {
-        int hash;
+        int hash; // hash code
         Object key;
         Object value;
         Entry next;
@@ -23,9 +23,15 @@ public class HashTable {
     }
 
     Entry[] table = new Entry[16];
-    int size = 0;
+    int size = 0; // number of elements
     float loadFactor = 0.75f;
     int threshold = (int) (loadFactor * table.length);
+
+    /* Replacing modulo operation with bitwise operation
+   - Assumption: The array length is a power of 2
+   - hash % array length is equivalent to hash & (array length - 1)
+*/
+
 
     //Get value based on hash code
     Object get(int hash, Object key) {
