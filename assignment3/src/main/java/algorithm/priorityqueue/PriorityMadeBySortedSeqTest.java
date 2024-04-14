@@ -7,7 +7,7 @@ public class PriorityMadeBySortedSeqTest {
         long startTime, endTime;
 
         // testing procedure
-        int[] numbersOfEleArr = new int[]{50, 500, 5000, 50000, 500000, 5000000};
+        int[] numbersOfEleArr = new int[]{50, 500, 5000, 50000};
 
         for(int ele: numbersOfEleArr){
             testWithNumbers(ele);

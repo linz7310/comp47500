@@ -47,12 +47,14 @@ public class HashTable {
     void put(int hash, Object key, Object value) {
         int idx = hash & (table.length - 1);
         if (table[idx] == null) {
+            //1. if idx = null just add it
             table[idx] = new Entry(hash, key, value);
         } else {
+            // idx != null if there is a duplicate key, update it, or add a new one.
             Entry p = table[idx];
             while (true) {
                 if (p.key.equals(key)) {
-                    p.value = value;
+                    p.value = value; // update
                     return;
                 }
                 if (p.next == null) {
@@ -60,7 +62,7 @@ public class HashTable {
                 }
                 p = p.next;
             }
-            p.next = new Entry(hash, key, value);
+            p.next = new Entry(hash, key, value); // add new one
         }
         size++;
         if (size > threshold) {
@@ -78,6 +80,7 @@ public class HashTable {
         Entry prev = null;
         while (p != null) {
             if (p.key.equals(key)) {
+                // find it and delete
                 if (prev == null) {
                     table[idx] = p.next;
                 } else {
@@ -118,6 +121,7 @@ public class HashTable {
                     }
                     p = p.next;
                 }
+                // Law: a linked table keeps index position, b linked table index position + table.length
                 if (a != null) {
                     a.next = null;
                     newTable[i] = aHead;

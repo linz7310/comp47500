@@ -4,14 +4,14 @@ import Tree.datastructure.binarysearchtree.TreeNode;
 import java.util.LinkedList;
 
 /**
- * ClassName BTSTree
+ * ClassName BSTTree
  * Package Tree.algorithm.binarysearchtree
  * Description:
  *Validate Binary Search Tree
  * @Author: Lin
  * @Creat: 2024/3/18
  */
-public class BTSTree {
+public class BSTTree {
     public boolean isValidBST(TreeNode node) {
         TreeNode p = node;
         LinkedList<TreeNode> stack = new LinkedList<>();
@@ -42,7 +42,7 @@ public class BTSTree {
             1   3
         */
         TreeNode root1 = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)), new TreeNode(6));
-        System.out.println(new BTSTree().isValidBST(root1));
+        System.out.println(new BSTTree().isValidBST(root1));
 //        System.out.println("---------------");
         /*
                 4
@@ -52,7 +52,7 @@ public class BTSTree {
                 3   7
          */
         TreeNode root2 = new TreeNode(4, new TreeNode(2), new TreeNode(6, new TreeNode(3), new TreeNode(7)));
-        System.out.println(new BTSTree().isValidBST(root2));
+        System.out.println(new BSTTree().isValidBST(root2));
 //        System.out.println("---------------");
 
         /*
@@ -61,7 +61,7 @@ public class BTSTree {
              1
          */
         TreeNode root3 = new TreeNode(1, new TreeNode(1), null);
-        System.out.println(new BTSTree().isValidBST(root3));
+        System.out.println(new BSTTree().isValidBST(root3));
 //        System.out.println("---------------");
 
         /*
@@ -72,6 +72,6 @@ public class BTSTree {
               5
          */
         TreeNode root4 = new TreeNode(3, null, new TreeNode(4, new TreeNode(5), null));
-        System.out.println(new BTSTree().isValidBST(root4));
+        System.out.println(new BSTTree().isValidBST(root4));
     }
 }

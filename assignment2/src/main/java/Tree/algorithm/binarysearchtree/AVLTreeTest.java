@@ -7,6 +7,7 @@ import java.util.Random;
 public class AVLTreeTest {
 
     public static void main(String[] args) {
+        // Array of different node counts to test the AVL tree with varying sizes
         int[] nodeCounts = {10000, 5000, 1000, 500, 200,100, 50};
 
         for (int count : nodeCounts) {
@@ -16,7 +17,7 @@ public class AVLTreeTest {
             long deleteTime = 0;
 
             Random random = new Random();
-
+            // Insert 'count' number of nodes into the AVL tree
             for (int i = 0; i < count; i++) {
                 int key = random.nextInt(10000);
                 long startTime = System.nanoTime();
@@ -26,7 +27,7 @@ public class AVLTreeTest {
             }
 
             System.out.println("Average insertion time for " + count + " nodes: " + (insertTime / count) + " nanoseconds");
-
+            // Delete 'count' number of nodes from the AVL tree
             for (int i = 0; i < count; i++) {
                 int key = random.nextInt(10000);
                 long startTime = System.nanoTime();

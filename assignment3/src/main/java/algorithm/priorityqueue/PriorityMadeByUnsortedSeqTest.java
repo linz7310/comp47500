@@ -36,7 +36,5 @@ public class PriorityMadeByUnsortedSeqTest {
         endTime = System.nanoTime();
         System.out.println("Deleted element: " + " in " + (endTime - startTime) + " ns");
 
-        System.out.println("Is empty: " + priorityQueue.isEmpty());
-        System.out.println("Is full: " + priorityQueue.isFull());
     }
 }
