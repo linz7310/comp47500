@@ -1,5 +1,8 @@
 package datastructure.hashtable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ClassName HashTable
  * Package datastructure.hashtable
@@ -100,11 +103,26 @@ public class HashTable {
         }
         return null;
     }
+    public int countUniqueKeys() {
+        int uniqueKeys = 0;
+        List<Object> seenKeys = new ArrayList<>();
+        for (Entry entry : table) {
+            while (entry != null) {
+                if (!seenKeys.contains(entry.key)) {
+                    seenKeys.add(entry.key);
+                    uniqueKeys++;
+                }
+                entry = entry.next;
+            }
+        }
+        return uniqueKeys;
+    }
 
     private void resize() {
         Entry[] newTable = new Entry[table.length << 1];
         for (int i = 0; i < table.length; i++) {
             Entry p = table[i]; // 拿到每个链表头
+
             if (p != null) {
 
                 Entry a = null;

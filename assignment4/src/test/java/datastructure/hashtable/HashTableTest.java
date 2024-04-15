@@ -39,11 +39,11 @@ public class HashTableTest {
     void testRemove() {
         HashTable ht = new HashTable();
         ht.put(1, "key1", "value1");
-        ht.put(2, "key2", "value2");
+        ht.put(1, "key11", "value11");
 
         assertEquals("value1", ht.remove(1, "key1"));
         assertNull(ht.get(1, "key1"));  //  Confirmation that the data has been deleted
-        assertNotNull(ht.get(2, "key2"));  // Confirmation that other data are not affected
+        assertNotNull(ht.get(1, "key11"));  // Confirmation that other data are not affected
     }
 
     @Test
