@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class LSHSimilaritySearch {
 
     public static void main(String[] args) {
@@ -32,15 +33,36 @@ public class LSHSimilaritySearch {
         System.out.println(Arrays.toString(firstHash));
 
         // search the comment with the most similarity for the first comment
-        for(int i = 0;i < res.size();i++){
+        List<String> textLines = readTextColumnFromCSV("./Reddit_Data.csv", "clean_comment");
+        System.out.println("first line comment:" + textLines.get(0));
+        for(int i = 1;i < res.size();i++){
             int[] tmpHash = lsh.hash(res.get(i));
-            System.out.println("Similar comment: " + comment.text());
-            assertThat(isCloseOrEqual(secondHash[lastIndexOfResult], thirdHash[lastIndexOfResult], numberOfBuckets)).isTrue();
+            if(isCloseOrEqual(firstHash, tmpHash, 0.87)){
+                System.out.println(i + "th line comment is similar to the first line");
+                System.out.println(i + "th line comment:" + textLines.get(i));
+            }
         }
 
     }
-    private boolean isCloseOrEqual(int secondHash, int thirdHash, int numberOfBuckets) {
-        return Math.abs(secondHash - thirdHash) < numberOfBuckets / 2;
+    public static boolean isCloseOrEqual(int[] secondHash, int[] firstHash, double threshold) {
+        return cosSim(firstHash, secondHash) > threshold;
+    }
+
+    public static double cosSim(int[] vec1, int[] vec2) {
+        double result = 0.0;
+        for (int i = 0; i < vec1.length; i++) {
+            result += vec1[i] * vec2[i];
+        }
+
+        double normVec1 = 0.0;
+        double normVec2 = 0.0;
+        for (int i = 0; i < vec1.length; i++) {
+            normVec1 += vec1[i] * vec1[i];
+            normVec2 += vec2[i] * vec2[i];
+        }
+
+        double res = result/(Math.sqrt(normVec1) * Math.sqrt(normVec2));
+        return res;
     }
 
         // 从CSV文件读取指定列的文本
