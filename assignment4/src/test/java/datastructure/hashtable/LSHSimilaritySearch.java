@@ -32,11 +32,15 @@ public class LSHSimilaritySearch {
         System.out.println(Arrays.toString(firstHash));
 
         // search the comment with the most similarity for the first comment
-//        for(int i = 0;i < )
+        for(int i = 0;i < res.size();i++){
+            int[] tmpHash = lsh.hash(res.get(i));
+            System.out.println("Similar comment: " + comment.text());
+            assertThat(isCloseOrEqual(secondHash[lastIndexOfResult], thirdHash[lastIndexOfResult], numberOfBuckets)).isTrue();
+        }
 
-//        for (Vector comment : similarComments) {
-//            System.out.println("Similar comment: " + comment.text());
-//        }
+    }
+    private boolean isCloseOrEqual(int secondHash, int thirdHash, int numberOfBuckets) {
+        return Math.abs(secondHash - thirdHash) < numberOfBuckets / 2;
     }
 
         // 从CSV文件读取指定列的文本
