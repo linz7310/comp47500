@@ -103,6 +103,7 @@ public class HashTable {
         }
         return null;
     }
+    //for the big data test
     public int countUniqueKeys() {
         int uniqueKeys = 0;
         List<Object> seenKeys = new ArrayList<>();
@@ -121,7 +122,7 @@ public class HashTable {
     private void resize() {
         Entry[] newTable = new Entry[table.length << 1];
         for (int i = 0; i < table.length; i++) {
-            Entry p = table[i]; // 拿到每个链表头
+            Entry p = table[i]; // Get the head of linked list
 
             if (p != null) {
 
