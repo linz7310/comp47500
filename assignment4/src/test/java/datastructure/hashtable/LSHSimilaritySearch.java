@@ -7,62 +7,38 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class LSHSimilaritySearch {
 
     public static void main(String[] args) {
-        // 评论数据
-
-        boolean[] vector1 = new boolean[] {true, true, true, true, true};
-        boolean[] vector2 = new boolean[] {false, false, false, true, false};
-        boolean[] vector3 = new boolean[] {false, false, true, true, false};
-
-
-
         List<boolean[]> res = createVectorFromText();
-//        System.out.println(res);
 
         int sizeOfVectors = res.get(0).length;
-        int numberOfBuckets = 500;
-        int stages = 40;
+        int numberOfBuckets = 400;
+        int stages = 4;
 
         LSHMinHash lsh = new LSHMinHash(stages, numberOfBuckets, sizeOfVectors);
 
-        int[] firstHash = lsh.hash(res.get(1));
-
-        System.out.println(Arrays.toString(firstHash));
-
+        int[] firstHash = lsh.hash(res.get(0));
         // search the comment with the most similarity for the first comment
         List<String> textLines = readTextColumnFromCSV("./Reddit_Data.csv", "clean_comment");
+
         System.out.println("first line comment:" + textLines.get(0));
+        int lastIndexOfResult = stages - 1;
+
         for(int i = 1;i < res.size();i++){
             int[] tmpHash = lsh.hash(res.get(i));
-            if(isCloseOrEqual(firstHash, tmpHash, 0.87)){
-                System.out.println(i + "th line comment is similar to the first line");
-                System.out.println(i + "th line comment:" + textLines.get(i));
+            if(textLines.get(i).replace(" ", "") != ""){
+                if(isCloseOrEqual(tmpHash[lastIndexOfResult], firstHash[lastIndexOfResult]) == true){
+                    System.out.println(i + "th comment line is similar to the first line");
+                    System.out.println(textLines.get(i));
+                }
             }
         }
 
     }
-    public static boolean isCloseOrEqual(int[] secondHash, int[] firstHash, double threshold) {
-        return cosSim(firstHash, secondHash) > threshold;
-    }
 
-    public static double cosSim(int[] vec1, int[] vec2) {
-        double result = 0.0;
-        for (int i = 0; i < vec1.length; i++) {
-            result += vec1[i] * vec2[i];
-        }
-
-        double normVec1 = 0.0;
-        double normVec2 = 0.0;
-        for (int i = 0; i < vec1.length; i++) {
-            normVec1 += vec1[i] * vec1[i];
-            normVec2 += vec2[i] * vec2[i];
-        }
-
-        double res = result/(Math.sqrt(normVec1) * Math.sqrt(normVec2));
-        return res;
+    public static boolean isCloseOrEqual(int secondHash, int thirdHash) {
+        return Math.abs(secondHash - thirdHash) == 0;
     }
 
         // 从CSV文件读取指定列的文本
