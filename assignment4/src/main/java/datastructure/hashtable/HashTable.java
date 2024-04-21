@@ -12,7 +12,7 @@ import java.util.List;
  * @Creat: 2024/4/10
  */
 public class HashTable {
-    static class Entry {
+    public static class Entry {
         int hash; // hash code
         Object key;
         Object value;
@@ -37,7 +37,7 @@ public class HashTable {
 
 
     //Get value based on hash code
-    Object get(int hash, Object key) {
+    public Object get(int hash, Object key) {
         int idx = hash & (table.length - 1);
         if (table[idx] == null) {
             return null;
@@ -53,7 +53,7 @@ public class HashTable {
     }
 
     //    put a new key value in hash table if the key exist update it
-    void put(int hash, Object key, Object value) {
+    public void put(int hash, Object key, Object value) {
         int idx = hash & (table.length - 1);
         if (table[idx] == null) {
             //1. if idx = null just add it
@@ -117,6 +117,19 @@ public class HashTable {
             }
         }
         return uniqueKeys;
+    }
+
+    public List<Object> getAllUniqueKeys() {
+        List<Object> seenKeys = new ArrayList<>();
+        for (Entry entry : table) {
+            while (entry != null) {
+                if (!seenKeys.contains(entry.key)) {
+                    seenKeys.add(entry.key);
+                }
+                entry = entry.next;
+            }
+        }
+        return seenKeys;
     }
 
     private void resize() {
