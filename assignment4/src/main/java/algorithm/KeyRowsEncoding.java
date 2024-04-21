@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
-    Problem: supposed there is an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard like the image below.
+    Problem: supposed there is an array of strings words, return the words that can be typed using letters of the alphabet on only one row of American keyboard
 
     Solution: The key to this problem is to encode the keyboard information into the hash table.
     We can save the three lines of keyboard characters into three tables, and then traverse
