@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class HashTableBigDataTest {
     public static void main(String[] args) {
-        String csvFile = "E:/研究生/comp47500 datastructure/comp47500 datastructure/assignment4/src/main/resources/ecommerce_user.csv";
-        String line;
+        String csvFile = "/Users/pangmingyu/IdeaProjects/comp47500/assignment4/src/main/resources/ecommerce_consumer_behaviour_small.csv";
+                String line;
         String csvSplitBy = ",";
         HashTable ht = new HashTable();
         int totalElemnts = 0;  // Total number of lines read and Elemnts added
@@ -22,8 +22,8 @@ public class HashTableBigDataTest {
             while ((line = reader.readLine()) != null) {
                 String[] fields = line.split(csvSplitBy);
                 if (fields.length > 0) {
-                    String key = fields[0];  // Assuming first column is the key
-                    ht.put(key.hashCode(), key, line);  // Storing the whole line as the value
+                    int orderId = Integer.parseInt(fields[0]);  // we use orderId to do the hash test
+                    ht.put(orderId % 1000, orderId, line);  // store the ids
                     totalElemnts++;
                 }
             }
@@ -37,10 +37,10 @@ public class HashTableBigDataTest {
 
         long endTime = System.currentTimeMillis();  // End time for inserts
         long insertTime = endTime - startTime;  // Total time for inserts
-        System.out.println("Total Elemnts added: " + totalElemnts);
+        System.out.println("Total orderIds added: " + totalElemnts);
         System.out.println("Insertion took: " + insertTime + " ms");
         int uniqueKeys = ht.countUniqueKeys();
-        System.out.println("Total unique keys: " + uniqueKeys);
+        System.out.println("Total unique orderIds: " + uniqueKeys);
 
 
         // Deleting half of the Elemnts
@@ -54,8 +54,8 @@ public class HashTableBigDataTest {
             while ((line = reader.readLine()) != null && deletedElements < deleteCount) {
                 String[] fields = line.split(csvSplitBy);
                 if (fields.length > 0) {
-                    String key = fields[0];
-                    if (ht.remove(key.hashCode(), key) != null) {
+                    int key = Integer.parseInt(fields[0]);
+                    if (ht.remove(key % 1000, key) != null) {
                         deletedElements++;
                     }
                 }

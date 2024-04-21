@@ -9,6 +9,7 @@ import java.util.List;
 
 // we noticed that LSH(locality sensitive hashing) is very effective and useful ,so we wrote a test to apply it on
 // the reddit comment data, to find out the similarities among the comments
+// minHash: https://en.wikipedia.org/wiki/MinHash
 public class LSHSimilaritySearch {
 
     public static void main(String[] args) {
