@@ -35,6 +35,7 @@ public class HashTableBigDataTest {
             return;
         }
 
+        // test insertion time
         long endTime = System.currentTimeMillis();  // End time for inserts
         long insertTime = endTime - startTime;  // Total time for inserts
         System.out.println("Total orderIds added: " + totalElemnts);
@@ -43,7 +44,7 @@ public class HashTableBigDataTest {
         System.out.println("Total unique orderIds: " + uniqueKeys);
 
 
-        // Deleting half of the Elemnts
+        // test deletion time
         int deleteCount = 500;  // Number of Elemnts to delete
         int deletedElements = 0;
         startTime = System.currentTimeMillis();  // Reset start time for deletions
