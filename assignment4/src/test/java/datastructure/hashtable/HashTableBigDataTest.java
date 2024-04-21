@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class HashTableBigDataTest {
     public static void main(String[] args) {
         String csvFile = "/Users/pangmingyu/IdeaProjects/comp47500/assignment4/src/main/resources/ecommerce_consumer_behaviour_small.csv";
-                String line;
+        String line;
         String csvSplitBy = ",";
         HashTable ht = new HashTable();
         int totalElemnts = 0;  // Total number of lines read and Elemnts added
