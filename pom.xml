@@ -12,6 +12,8 @@
         <module>assignment2</module>
         <module>assignment3</module>
         <module>assignment4</module>
+        <module>assignment5</module>
+        <module>assignment5_page_rank</module>
     </modules>
 
     <properties>

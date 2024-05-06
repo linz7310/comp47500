@@ -2,11 +2,14 @@ package datastructure;
 
 import java.util.*;
 
+// direct graph: A -> B
+// indirect graph: A - B, when storing, we need to store two edges, A -> B, B -> A, so when we calculate the
+// edges, we need to consider this
 public class Graph {
     // using map to store the edges and the relation between vertex and edges
     // key is the vertex, value is the edges whose source is the vertex
-    private Map<Vertex, List<Edge>> adjacencyMap;
-    private Set<Vertex> vertices;
+    private Map<Vertex, List<Edge>> adjacencyMap;  // store all the edges
+    private Set<Vertex> vertices;   // store all vertices
 
     boolean isDirected = true; // is direct graph in default
 
@@ -33,6 +36,7 @@ public class Graph {
         return null;
     }
 
+    // To remove all outgoing and incoming edges of this node
     public void removeVertex(Vertex vertex) {
         for (List<Edge> edges : adjacencyMap.values()) {
             for(Edge edge: edges){
@@ -57,7 +61,7 @@ public class Graph {
         source.outDegreePlusOne();
         destination.inDegreePlusOne();
 
-        // If it is an undirected graph, you also need to add reverse edges
+        // If it is an undirected graph, we also need to add reverse edges
         if(!this.isDirected){
             adjacencyMap.putIfAbsent(destination, new ArrayList<>());
             this.adjacencyMap.get(destination).add(new Edge(destination, source, weight));
@@ -75,12 +79,12 @@ public class Graph {
                 for(Edge edge: newEdges){
                     if(edge.getDestination().equals(destination) && edge.weight == weight){
                         edges.remove(edge);
-                        key.outDegreeMinusOne();
+                        key.outDegreeMinusOne();  // we also need to recalculate the degree
                         edge.getDestination().inDegreeMinusOne();
                     }
                 }
             }
-            // If it is an undirected graph, you also need to delete the reverse edges.
+            // If it is an undirected graph, we also need to delete the reverse edges.
             if (!this.isDirected && key.equals(destination)) {
                 List<Edge> newEdges = List.copyOf(edges);
                 for(Edge edge: newEdges){
@@ -119,7 +123,7 @@ public class Graph {
         if(isDirected)
             return numEdges;
         else
-            return numEdges / 2;
+            return numEdges / 2;  // if it is indirect graph, we need to do division
     }
 
     // print the graph

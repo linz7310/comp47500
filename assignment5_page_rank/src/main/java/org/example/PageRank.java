@@ -12,6 +12,7 @@ import scala.Tuple2;
 import java.util.List;
 
 // dataset link: https://www.kaggle.com/datasets/mathurinache/twitter-edge-nodes/data
+// because the data is so large, we can't upload to github, so we just provide the link here.
 
 public class PageRank {
     public static void main(String[] args) {

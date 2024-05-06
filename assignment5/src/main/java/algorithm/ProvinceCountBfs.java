@@ -14,7 +14,7 @@ public class ProvinceCountBfs {
         for (Vertex vertex : graph.getAllVertices()) {
             if (!visitedVertices.contains(vertex)) {
                 List<Vertex> province = bfs(graph, vertex, visitedVertices);
-                provinces.add(province);
+                provinces.add(province);  // Each time the traversal is completed, store the province of the same group
             }
         }
         return provinces;
@@ -27,7 +27,7 @@ public class ProvinceCountBfs {
         visitedVertices.add(startVertex);
         while (!queue.isEmpty()) {
             Vertex currentVertex = queue.poll();
-            province.add(currentVertex); // 将当前顶点加入省份列表中
+            province.add(currentVertex); // Add the current vertex to the province list
             for (Edge edge : graph.getAdjacencyMap().getOrDefault(currentVertex, new ArrayList<>())) {
                 Vertex neighbor = edge.getDestination();
                 if (!visitedVertices.contains(neighbor)) {
@@ -41,6 +41,7 @@ public class ProvinceCountBfs {
 
     public static void main(String[] args) {
         final int ITERATIONS = 5;
+        // Iterate multiple times and record the traversal time required for graphs of different sizes.
         for (int N = 0; N <= 500000; N += 500) {
             Graph graph = generateRandomGraph(N);
             //System.out.println("The number of edges and vertices:\n" + graph.getNumEdges() + "," + graph.getNumVertex());
@@ -68,6 +69,7 @@ public class ProvinceCountBfs {
         }
     }
 
+    // Randomly generate a graph, the parameter is the number of nodes in the graph
     private static Graph generateRandomGraph(int numVertices) {
         Random generator = new Random();
         Graph graph = new Graph(false);
@@ -84,7 +86,7 @@ public class ProvinceCountBfs {
             int value1 = generator.nextInt(numVertices); // Randomly generate the first vertex value
             int value2 = generator.nextInt(numVertices); // Randomly generate the second vertex value
 
-            // 如果生成的两个顶点值相同或已经生成过该边，则重新生成
+            // If the two generated vertices have the same value or the edge has already been generated, regenerate it
             while (value1 == value2 || generated.contains(value1 * numVertices + value2) || generated.contains(value2 * numVertices + value1)) {
                 value1 = generator.nextInt(numVertices);
                 value2 = generator.nextInt(numVertices);
@@ -103,7 +105,7 @@ public class ProvinceCountBfs {
     }
 
     public static void smallTest() {
-        // 创建一个 Graph 对象并添加边
+        // create a graph and add the vertex and edges
         Graph graph = new Graph(false);
         Vertex v1 = new Vertex(1,1);
         Vertex v2 = new Vertex(2,2);
