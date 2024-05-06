@@ -6,6 +6,14 @@ import datastructure.Edge;
 import datastructure.Graph;
 import datastructure.Vertex;
 
+/*
+background: Imagine there are n cities. Some of them are connected,
+while others are not. If city a is directly connected to city b, and city b is directly connected to city c,
+then city a is indirectly connected to city c.
+A province is a group of directly or indirectly connected cities, with no other cities outside the group.
+Given an n x n matrix isConnected, where if the i-th city and the j-th city are directly connected,
+then isConnected[i][j] = 1, otherwise isConnected[i][j] = 0.  Returns the total number of provinces.
+ */
 public class ProvinceCountBfs {
 
     public static List<List<Vertex>> findProvinces(Graph graph) {
